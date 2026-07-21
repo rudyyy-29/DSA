@@ -1,0 +1,108 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+#define MAX 5
+
+class STACK{
+            private:
+                string books[MAX];
+                int top;
+            public:
+                Stack()
+                {
+                    top = -1;
+                }
+
+                void push(string book)
+                {
+                    if(top == MAX-1)
+                    {
+                        cout<< "The Stack is OverFlown! No space left to add more books.\n";
+                        return;
+                    }
+                    top++;
+                    books[top] = book;
+                    cout << book << " Book is successfully Registered and Added!\n";
+                }
+
+                void pop ()
+                {
+                    if (top == -1)
+                    {
+                        cout << "The Stack is Empty. You cannot pop any element!\n";
+                        return;
+                    }
+                    cout << books[top] << "arranged in the shelf.\n";
+                    top--;
+                }
+
+                void peek()
+                {
+                    if (top == -1)
+                    {
+                        cout << "Stack Empty!!\n";
+                        return;
+                    }
+                    cout << "Top Book: "<< books[top] << "\n";
+                }
+
+                void Display()
+                {
+                    if (top == -1)
+                    {
+                        cout << "Stack Empty!!\n" ;
+                        return;
+                    }
+                    cout << "Stack Elements: \n";
+                    for (int i= top ; i>=0; i--)
+                    {
+                        cout << books[i] << "\n";
+                    }
+                }
+};
+
+int main()
+{
+    STACK s;
+    int choice;
+    string book;
+    //s.push();
+    //s.pop();
+   // s.peek();
+    //s.Display();
+
+    do
+    {
+      cout << "\n========LIBRARY STACK MENU=======\n";
+      cout << " 1.Return Book \n 2.Arrange Books \n 3.Top Book \n 4.Display \n 5.Exit \n";
+      cout << "Enter from the following Choice: 1-5: \n";
+      cin >> choice;
+
+    switch (choice)
+    {
+    case 1: //push
+        cout << "Enter Name of the Book to Return.\n";
+        getline(cin, book);
+        s.push(book);
+        cin.ignore();
+        break;
+    case 2: //pop
+        s.pop ();
+        break;
+    case 3: //peek
+        s.peek();
+        break;
+    case 4: //disp
+        s.Display();
+        break;
+    case 5:
+        cout << "Exiting Program..........\n";
+        break;
+    default:
+        cout << "Invalid Choice!\n";
+      }
+    } while (choice == 5);
+      return 0;
+}
