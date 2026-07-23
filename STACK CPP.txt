@@ -61,17 +61,15 @@ class STACK{
                         cout << books[i] << "\n";
                     }
                 }
-};
+          };
+
+
 
 int main()
 {
     STACK s;
     int choice;
     string book;
-    //s.push();
-    //s.pop();
-   // s.peek();
-    //s.Display();
 
     do
     {
