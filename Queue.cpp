@@ -56,7 +56,7 @@ public:
         cout << "Queue Elements:------------------------------------------------------" << endl;
         for(int i= front; i < rear; i++)
             {
-                cout << arr[i] << endl;
+                cout << arr[i] << " ";
             }
     }
 };
@@ -69,7 +69,7 @@ int main()
 
     do
     {
-      cout << "\n========TICKET BOOKING COUNTER=======\n";
+      cout << "\n========TICKET BOOKING COUNTER========\n";
       cout << " 1.ADD CUSTOMER \n 2.DELETE CUSTOMER \n 3.SHOW CUSTOMER ORDER \n 4.Exit \n";
       cout << "Enter from the following Choice: 1-4: \n";
       cin >> choice;
@@ -81,7 +81,6 @@ int main()
         cout << "Enter Name of the Customer to add.\n";
         getline(cin, name);
         Q.EnQueue(name);
-
         break;
     case 2: //dequeue
         Q.DeQueue();
@@ -95,6 +94,6 @@ int main()
     default:
         cout << "Invalid Choice!\n";
       }
-    } while (choice == 5);
+    } while (choice != 5);
       return 0;
 }
