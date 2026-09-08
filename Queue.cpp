@@ -4,19 +4,19 @@ using namespace std;
 #define MAX 5
 
 class Queue{
-private:
-    string arr[MAX];
-    int front;
-    int rear;
+      private:
+        string arr[MAX];
+        int front;
+        int rear;
 
-public:
-    Queue()
-    {
+     public:
+        Queue()
+        {
         front =-1;
         rear= -1;
-    }
-    void EnQueue(string name)
-    {
+        }
+        void EnQueue(string name)
+        {
         if (rear == MAX-1)
         {
             cout<< "Queue is Full! Cannot Insert " << name << endl;
