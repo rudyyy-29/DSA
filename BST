@@ -72,8 +72,8 @@ void Mirror(Node *root){
     temp = root -> right;
     root -> right = root -> left;
     root -> left = temp;
-    Mirror(root ->right);
     Mirror(root -> left);
+    Mirror(root ->right);
     }
 
 int main()
