@@ -8,13 +8,13 @@ struct Node {
 
     Node(int value) {
         data = value;
-        left = nullptr;
-        right = nullptr;
+        left = NULL;
+        right = NULL;
     }
 };
 
 Node* insert(Node* root, int value) {
-    if (root == nullptr) {
+    if (root == NULL) {
         return new Node(value);
     }
     if (value < root->data)
@@ -31,8 +31,8 @@ void inorder(Node* root) {
     int top = -1;
 
     Node* current = root;
-    while (current != nullptr || top != -1) {
-        while (current != nullptr) {
+    while (current != NULL || top != -1) {
+        while (current != NULL) {
             top++;
             stack[top] = current;
             current = current->left;
@@ -44,7 +44,7 @@ void inorder(Node* root) {
 }
 
 void preorder(Node* root) {
-    if (root == nullptr)
+    if (root == NULL)
         return;
 
     Node* stack[20];
@@ -55,12 +55,12 @@ void preorder(Node* root) {
         Node* current = stack[top--];
         cout << current->data << " ";
 
-        if (current->right != nullptr){
+        if (current->right != NULL){
             top++;
             stack[top] = current->right;
         }
 
-        if (current->left != nullptr){
+        if (current->left != NULL){
             top++;
             stack[top] = current->left;
         }
@@ -70,7 +70,7 @@ void preorder(Node* root) {
 
 int main() 
 {
-    Node* root = nullptr;
+    Node* root = NULL;
 
     int n, value;
     cout << "Enter number of nodes: ";
