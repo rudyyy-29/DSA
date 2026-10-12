@@ -1,9 +1,6 @@
-//needs leaf node function and changes in mirror function
-
 #include <iostream>
 #include <queue>
 #include <algorithm>
-
 using namespace std;
 
 struct Node {
@@ -18,16 +15,17 @@ struct Node {
 };
 
 Node* insert(Node* root, int data) {
-    if (root == NULL) {
+    if (root == NULL)
         return new Node(data);
-    }
-    if (data < root-> data) {
-        root-> left = insert(root-> left, data);
-    } else if (data > root-> data) {
-        root-> right = insert(root-> right, data);
-    }
+
+    if (data < root->data)
+        root->left = insert(root->left, data);
+    else if (data > root->data)
+        root->right = insert(root->right, data);
+
     return root;
 }
+
 void LevelOrder(Node* root) {
     if (root == NULL)
         return;
@@ -37,13 +35,19 @@ void LevelOrder(Node* root) {
 
     while (!q.empty()) {
         int levelSize = q.size();
+
         while (levelSize > 0) {
             Node* curr = q.front();
             q.pop();
+
             cout << curr->data << " ";
 
-            if (curr->left != NULL) q.push(curr->left);
-            if (curr->right != NULL) q.push(curr->right);
+            if (curr->left != NULL)
+                q.push(curr->left);
+
+            if (curr->right != NULL)
+                q.push(curr->right);
+
             levelSize--;
         }
         cout << "| ";
@@ -51,56 +55,75 @@ void LevelOrder(Node* root) {
     cout << endl;
 }
 
-int Height(Node* root)
-    {
-        if (root == NULL)
-            return -1;
+int Height(Node* root) {
+    if (root == NULL)
+        return -1;
 
-        int Leftheight = Height(root -> left);
-        int Rightheight = Height(root -> right);
-            if (Leftheight >= Rightheight){
-                return Leftheight + 1;
-            }
-            else
-                return Rightheight + 1;
-    }
+    int leftHeight = Height(root->left);
+    int rightHeight = Height(root->right);
 
-void Mirror(Node *root){
+    return max(leftHeight, rightHeight) + 1;
+}
+
+void DisplayLeafNodes(Node* root) {
     if (root == NULL)
         return;
-    Node *temp;
-    temp = root -> right;
-    root -> right = root -> left;
-    root -> left = temp;
-    Mirror(root -> left);
-    Mirror(root ->right);
+
+    if (root->left == NULL && root->right == NULL) {
+        cout << root->data << " ";
+        return;
     }
 
-int main()
-{
-    Node *root= NULL;
+    DisplayLeafNodes(root->left);
+    DisplayLeafNodes(root->right);
+}
+
+void Mirror(Node* root) {
+    if (root == NULL)
+        return;
+
+    swap(root->left, root->right);
+
+    Mirror(root->left);
+    Mirror(root->right);
+}
+
+int main() {
+    Node* root = NULL;
     int N, value;
-    cout << "Enter the Number of Nodes to be entered in the Tree: ";
+
+    cout << "Enter the Number of Nodes: ";
     cin >> N;
-    cout << "Enter the Node Data of "<<N<<" values: ";
-    for (int i=0; i<N; i++)
-        {
-            cin >> value;
-            root = insert(root,value);
-        }
+
+    cout << "Enter the Node Data of " << N << " values: ";
+
+    for (int i = 0; i < N; i++) {
+        cin >> value;
+        root = insert(root, value);
+    }
+
     cout << "\n--- Binary Search Tree Details ---\n";
 
-        cout << "Level-wise Traversal: ";
-        LevelOrder(root);
+    cout << "Level-wise Traversal: ";
+    LevelOrder(root);
 
-        cout << "Height of the Tree: " << Height(root) << endl;
+    cout << "Height of the Tree: " << Height(root) << endl;
 
+    cout << "Leaf Nodes: ";
+    DisplayLeafNodes(root);
+    cout << endl;
 
-        cout << "Mirroring the tree...\n";
-        Mirror(root);
+    cout << "\nMirroring the tree...\n";
+    Mirror(root);
 
-        cout << "Level-wise Traversal of Mirror Tree: ";
-        LevelOrder(root);
+    cout << "Level-wise Traversal of Mirror Tree: ";
+    LevelOrder(root);
 
-        return 0;
+    cout << "Height of Mirror Tree: " << Height(root) << endl;
+
+    cout << "Leaf Nodes of Mirror Tree: ";
+    DisplayLeafNodes(root);
+    cout << endl;
+
+    return 0;
 }
